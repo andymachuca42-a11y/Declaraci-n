@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Rosmery, con todo mi amor - Andy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #0c1c24 0%, #1a2f3a 50%, #2c4a5a 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Cielo estrellado con luciérnagas */
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite alternate;
+        }
+
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #f0e68c;
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 10px 2px #ffeb3b;
+            animation: fireflyMove 15s infinite linear;
+        }
+
+        /* Montañas en el fondo */
+        .mountains {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 2;
+            background: linear-gradient(to top, #1a472a 0%, #2e8b57 100%);
+            clip-path: polygon(0% 100%, 0% 40%, 5% 60%, 10% 30%, 15% 70%, 20% 20%, 25% 80%, 30% 40%, 35% 90%, 40% 50%, 45% 95%, 50% 60%, 55% 85%, 60% 40%, 65% 75%, 70% 30%, 75% 65%, 80% 20%, 85% 55%, 90% 15%, 95% 45%, 100% 10%, 100% 100%);
+        }
+
+        /* Jardín romántico */
+        .romantic-garden {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Casita de amor */
+        .love-house {
+            position: absolute;
+            bottom: 120px;
+            left: 5%;
+            width: 80px;
+            height: 70px;
+            z-index: 3;
+        }
+
+        .house-body {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(135deg, #d4a574 0%, #b8860b 100%);
+            border-radius: 8px 8px 0 0;
+            bottom: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .house-roof {
+            position: absolute;
+            width: 90px;
+            height: 35px;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            top: -20px;
+            left: -5px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .house-window {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fffacd;
+            border-radius: 50%;
+            top: 15px;
+            left: 25px;
+            box-shadow: 
+                inset 0 0 10px rgba(255, 215, 0, 0.5),
+                0 0 15px #ffeb3b;
+            animation: windowGlow 3s infinite alternate;
+        }
+
+        .house-door {
+            position: absolute;
+            width: 18px;
+            height: 30px;
+            background: #8b4513;
+            border-radius: 4px;
+            bottom: 0;
+            right: 15px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .house-heart {
+            position: absolute;
+            top: 10px;
+            right: 18px;
+            color: #ff6b9d;
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.7));
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* Árboles románticos */
+        .tree {
+            position: absolute;
+            bottom: 100px;
+            z-index: 3;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            width: 18px;
+            height: 60px;
+            background: linear-gradient(to right, #8b4513 0%, #a0522d 100%);
+            border-radius: 4px;
+        }
+
+        .tree-crown {
+            position: absolute;
+            bottom: 50px;
+            left: -20px;
+            width: 60px;
+            height: 70px;
+            background: radial-gradient(ellipse at center, #2e8b57 0%, #1a472a 100%);
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tree-heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 1rem;
+            top: 15px;
+            left: 20px;
+            animation: float 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 3px rgba(255, 107, 157, 0.7));
+        }
+
+        /* Flores románticas */
+        .flower {
+            position: absolute;
+            z-index: 4;
+        }
+
+        .flower-petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #ff6b9d 0%, #ff4081 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .flower-center {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle at 30% 30%, #ffd700 0%, #ffa500 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .flower-stem {
+            position: absolute;
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(to bottom, #2e8b57 0%, #1a472a 100%);
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .flower-leaf {
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #2e8b57;
+            border-radius: 50% 0 50% 0;
+            top: 30px;
+        }
+
+        /* Fuente de amor */
+        .love-fountain {
+            position: absolute;
+            bottom: 110px;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            z-index: 3;
+        }
+
+        .fountain-base {
+            position: absolute;
+            width: 45px;
+            height: 22px;
+            background: linear-gradient(135deg, #c0c0c0 0%, #a9a9a9 100%);
+            border-radius: 50%;
+            bottom: 0;
+            left: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fountain-middle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #d3d3d3 0%, #b0b0b0 100%);
+            border-radius: 50%;
+            bottom: 15px;
+            left: 15px;
+        }
+
+        .fountain-top {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #e8e8e8 0%, #c9c9c9 100%);
+            border-radius: 50%;
+            bottom: 30px;
+            left: 19px;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle at 30% 30%, #40c4ff 0%, #18ffff 100%);
+            border-radius: 50%;
+            animation: waterDrop 2s infinite;
+            filter: drop-shadow(0 0 5px rgba(64, 196, 255, 0.7));
+        }
+
+        /* Banquitos románticos */
+        .bench {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            width: 50px;
+            height: 22px;
+            z-index: 3;
+            transform: translateX(-50%);
+        }
+
+        .bench-seat {
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            border-radius: 4px;
+            bottom: 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bench-back {
+            position: absolute;
+            width: 50px;
+            height: 15px;
+            background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+            border-radius: 4px;
+            bottom: 8px;
+        }
+
+        .bench-legs {
+            position: absolute;
+            width: 5px;
+            height: 12px;
+            background: #8b4513;
+            border-radius: 2px;
+            bottom: -12px;
+        }
+
+        /* Corazones flotantes */
+        .floating-heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.7));
+            animation: floatHeart 8s infinite ease-in-out;
+            z-index: 2;
+            opacity: 0.8;
+        }
+
+        /* Luna romántica */
+        .romantic-moon {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #fffaf0 0%, #f0e68c 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(255, 250, 240, 0.8),
+                inset 0 0 30px rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            animation: moonGlow 8s infinite alternate;
+        }
+
+        .moon-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #ffd700;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+        }
+
+        /* Contenedor principal - REVISADO PARA MÓVIL */
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 10;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Encabezado */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInDown 2s ease-out;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 95%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            color: #ffd700;
+            text-shadow: 
+                0 0 15px rgba(255, 215, 0, 0.8),
+                0 0 30px rgba(255, 107, 157, 0.5);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e6e6fa;
+            font-style: italic;
+            font-family: 'Dancing Script', cursive;
+            line-height: 1.3;
+        }
+
+        /* Ángeles románticos */
+        .romantic-angels {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .angel {
+            position: absolute;
+            font-size: 2.8rem;
+            color: #fffacd;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 224, 0.9),
+                0 0 40px rgba(255, 107, 157, 0.5);
+            z-index: 2;
+            opacity: 0;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+            animation: floatAngel 8s infinite ease-in-out;
+        }
+
+        .angel-halo {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 15px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 224, 0.8) 0%, rgba(255, 255, 224, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* Carta romántica - REVISADA PARA MÓVIL */
+        .letter-romantic-container {
+            perspective: 800px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            z-index: 10;
+            width: 90%;
+            max-width: 320px;
+            height: 400px;
+        }
+
+        .letter-romantic {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .letter-romantic:hover {
+            transform: translateY(-10px) rotateX(5deg) scale(1.02);
+        }
+
+        .romantic-envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f9e8d8 0%, #f0d8c0 100%);
+            border-radius: 8px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 1px solid #d4b483;
+        }
+
+        .romantic-envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 2px, transparent 2px);
+            background-size: 25px 25px;
+            z-index: 1;
+        }
+
+        .romantic-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #f0d8c0 0%, #e8c9a8 100%);
+            clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+            transform-origin: top;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            z-index: 2;
+        }
+
+        .romantic-seal {
+            position: absolute;
+            bottom: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #ff6b9d, #ff4081);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 8px 15px rgba(0, 0, 0, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.2);
+            border: 2px solid #ff2d7a;
+            z-index: 3;
+        }
+
+        .romantic-seal i {
+            font-size: 2.5rem;
+            color: #fff;
+            animation: heartBeat 2s infinite;
+        }
+
+        .romantic-address {
+            position: absolute;
+            bottom: 22%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            color: #8b4513;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            width: 90%;
+            line-height: 1.3;
+        }
+
+        .romantic-address span {
+            display: block;
+            font-size: 1rem;
+            margin-top: 5px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #a0522d;
+        }
+
+        .open-hint {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8b4513;
+            font-size: 0.95rem;
+            font-weight: bold;
+            animation: pulseHint 2s infinite;
+            text-align: center;
+            z-index: 1;
+            width: 90%;
+            line-height: 1.3;
+        }
+
+        /* Carta abierta romántica - REVISADA PARA MÓVIL */
+        .letter-open-romantic {
+            display: none;
+            width: 95%;
+            max-width: 350px;
+            margin-bottom: 25px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .romantic-paper {
+            width: 100%;
+            min-height: 500px;
+            position: relative;
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 252, 240, 0.98) 100%);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 
+                0 20px 50px rgba(139, 69, 19, 0.4),
+                0 10px 30px rgba(255, 107, 157, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -2px 0 rgba(139, 69, 19, 0.1);
+            overflow: hidden;
+            border: 2px solid #f0e6d2;
+            font-family: 'Dancing Script', cursive;
+            color: #5d4037;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .romantic-paper::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            background: linear-gradient(45deg, #ff6b9d 0%, #ffd700 25%, #ff6b9d 50%, #ffd700 75%, #ff6b9d 100%);
+            border-radius: 14px;
+            z-index: -1;
+            opacity: 0.6;
+            animation: borderGlow 3s linear infinite;
+            background-size: 400% 400%;
+        }
+
+        .romantic-paper::after {
+            content: "💌";
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 2.8rem;
+            filter: drop-shadow(0 5px 15px rgba(255, 107, 157, 0.6));
+            animation: float 3s infinite ease-in-out;
+            z-index: 10;
+        }
+        
+        .paper-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .paper-corner-tl {
+            top: 10px;
+            left: 10px;
+        }
+        
+        .paper-corner-tr {
+            top: 10px;
+            right: 10px;
+        }
+        
+        .paper-corner-bl {
+            bottom: 10px;
+            left: 10px;
+        }
+        
+        .paper-corner-br {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .romantic-text {
+            position: relative;
+            z-index: 2;
+            line-height: 1.7;
+            font-size: 1.3rem;
+            text-align: justify;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .romantic-text p {
+            margin-bottom: 15px;
+            text-indent: 1em;
+        }
+
+        .romantic-question {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #ff6b9d;
+            margin: 25px 0;
+            padding: 10px 5px;
+            border-top: 2px dashed #ffb6c1;
+            border-bottom: 2px dashed #ffb6c1;
+            font-family: 'Sacramento', cursive;
+            line-height: 1.3;
+        }
+
+        .romantic-signature {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.6rem;
+            color: #8b4513;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        .romantic-date {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #a1887f;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Opciones de respuesta románticas - REVISADO PARA MÓVIL */
+        .romantic-response {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 95%;
+            max-width: 350px;
+            z-index: 11;
+            animation: fadeInUp 1.5s ease-out;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 25px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .romantic-question-title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-family: 'Sacramento', cursive;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            width: 100%;
+            padding: 0 5px;
+        }
+
+        .romantic-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .romantic-btn {
+            padding: 16px 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 250px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .romantic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+
+        .romantic-btn:hover::before {
+            left: 100%;
+        }
+
+        .romantic-btn:active {
+            transform: translateY(2px) scale(0.98);
+        }
+
+        .romantic-yes {
+            background: linear-gradient(135deg, #ff6b9d, #ff4081);
+            color: white;
+        }
+
+        .romantic-yes:hover {
+            box-shadow: 0 0 25px rgba(255, 107, 157, 0.8);
+        }
+
+        .romantic-no {
+            background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+            color: white;
+        }
+
+        .romantic-no:hover {
+            box-shadow: 0 0 25px rgba(149, 165, 166, 0.8);
+        }
+
+        /* Resultados románticos - REVISADO PARA MÓVIL */
+        .romantic-result {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .romantic-result-content {
+            text-align: center;
+            width: 95%;
+            max-width: 350px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+            padding: 30px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: romanticZoomIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .romantic-result-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 1%, transparent 1%);
+            background-size: 40px 40px;
+            animation: romanticSparkle 20s linear infinite;
+            z-index: -1;
+        }
+
+        .romantic-result-title {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .romantic-result-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            color: #f0f0f0;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .romantic-animation {
+            font-size: 4rem;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        /* Footer romántico - REVISADO PARA MÓVIL */
+        .romantic-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ffd700;
+            text-align: center;
+            z-index: 10;
+            font-style: italic;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            font-family: 'Dancing Script', cursive;
+            width: 95%;
+            max-width: 350px;
+            line-height: 1.4;
+        }
+
+        /* Animaciones mejoradas */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes fireflyMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(80px, 80px); }
+            50% { transform: translate(40px, 150px); }
+            75% { transform: translate(-40px, 80px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes floatAngel {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            33% { transform: translateY(-30px) rotate(5deg); opacity: 1; }
+            66% { transform: translateY(15px) rotate(-5deg); opacity: 0.9; }
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 60px rgba(255, 250, 240, 0.8); }
+            50% { box-shadow: 0 0 90px rgba(255, 250, 240, 0.9); }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes pulseHint {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.05); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes romanticZoomIn {
+            from { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes romanticSparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes windowGlow {
+            0%, 100% { box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.5), 0 0 15px #ffeb3b; }
+            50% { box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.7), 0 0 25px #ffeb3b; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            25% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+            50% { transform: translateY(-40px) rotate(0deg); opacity: 0.9; }
+            75% { transform: translateY(-20px) rotate(-10deg); opacity: 1; }
+        }
+
+        @keyframes waterDrop {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(80px) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Media queries específicas para móviles pequeños */
+        @media (max-width: 380px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .letter-romantic-container { height: 360px; }
+            .romantic-seal { width: 70px; height: 70px; }
+            .romantic-seal i { font-size: 2rem; }
+            .romantic-address { font-size: 1.6rem; }
+            .romantic-paper { min-height: 480px; padding: 20px 15px; }
+            .romantic-text { font-size: 1.2rem; }
+            .romantic-question { font-size: 1.3rem; }
+            .romantic-signature { font-size: 1.4rem; }
+            .romantic-footer { font-size: 0.85rem; padding: 10px 15px; }
+            .love-house { bottom: 100px; }
+            .tree { bottom: 80px; }
+            .love-fountain { bottom: 90px; }
+            .bench { bottom: 80px; }
+        }
+
+        @media (max-width: 320px) {
+            h1 { font-size: 1.8rem; }
+            .subtitle { font-size: 0.95rem; }
+            .letter-romantic-container { height: 340px; }
+            .romantic-paper { min-height: 460px; padding: 18px 12px; }
+            .romantic-text { font-size: 1.15rem; }
+            .romantic-question { font-size: 1.2rem; }
+            .romantic-response { padding: 20px 15px; }
+            .romantic-btn { padding: 14px 25px; font-size: 1.2rem; }
+        }
+
+        /* Ajustes para orientación horizontal */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container { padding: 10px; justify-content: flex-start; }
+            .header { margin-bottom: 15px; padding: 12px 15px; }
+            h1 { font-size: 1.8rem; }
+            .letter-romantic-container { margin-bottom: 15px; height: 300px; }
+            .romantic-paper { min-height: 350px; padding: 15px 12px; }
+            .romantic-text { font-size: 1.1rem; line-height: 1.5; }
+            .romantic-footer { margin-top: 15px; padding: 10px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cielo estrellado -->
+    <div class="night-sky" id="nightSky"></div>
+    
+    <!-- Montañas -->
+    <div class="mountains"></div>
+    
+    <!-- Jardín romántico -->
+    <div class="romantic-garden" id="romanticGarden"></div>
+    
+    <!-- Luna romántica -->
+    <div class="romantic-moon">
+        <div class="moon-face">🌙</div>
+    </div>
+    
+    <!-- Ángeles románticos -->
+    <div class="romantic-angels">
+        <div class="angel" id="angel1">
+            <div class="angel-halo"></div>
+            👼
+        </div>
+        <div class="angel" id="angel2">
+            <div class="angel-halo"></div>
+            👼
+        </div>
+        <div class="angel" id="angel3">
+            <div class="angel-halo"></div>
+            👼
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Para Mi Querida Rosmery</h1>
+            <div class="subtitle">Un mensaje que viene directamente de mi corazón</div>
+        </div>
+
+        <!-- Carta romántica cerrada -->
+        <div class="letter-romantic-container">
+            <div class="letter-romantic" id="letterRomantic">
+                <div class="romantic-envelope">
+                    <div class="romantic-flap"></div>
+                    <div class="romantic-seal">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="romantic-address">
+                        Para Rosmery<br>
+                        <span>La dueña de mi corazón</span>
+                    </div>
+                    <div class="open-hint">
+                        <i class="fas fa-hand-point-up"></i><br>
+                        Toca para abrir mi corazón
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carta romántica abierta -->
+        <div class="letter-open-romantic" id="letterOpenRomantic">
+            <div class="romantic-paper">
+                <div class="paper-decoration paper-corner-tl">🌹</div>
+                <div class="paper-decoration paper-corner-tr">🌹</div>
+                <div class="paper-decoration paper-corner-bl">💖</div>
+                <div class="paper-decoration paper-corner-br">💖</div>
+                <div class="romantic-text">
+                    <p>Mi adorada Rosmery,</p>
+                    <p>Desde que nuestros caminos se cruzaron, algo mágico despertó dentro de mí. Pero hay algo en ti que cautiva cada parte de mi ser: tus ojos marrones, del color del café más intenso y reconfortante. Ese café que, como tu mirada, me causa dulces insomnios y noches enteras de pensarte. Esa profundidad café que me hace soñar despierto y encontrar en ellos el hogar que mi alma siempre buscó.</p>
+                    <p>Cada día que pasaba sin verte era como una página en blanco esperando ser escrita. Anhelaba con todo mi ser el momento en que por fin podría abrazarte, sentir tu calor cerca de mí, y besar tus labios como si fuera la primera y la última vez. A pesar del tiempo que a veces nos separaba, mi corazón siempre latió al ritmo de tu nombre, Rosmery, guardando cada deseo, cada sueño, cada promesa de amor que solo a ti quiero entregar.</p>
+                    <p>Por eso hoy, con el corazón lleno de esperanza y los ojos iluminados por el recuerdo de los tuyos, me atrevo a preguntarte:</p>
+                    <div class="romantic-question">¿Me das el honor de ser tu novio?</div>
+                    <p>Prometo amarte cada día con la intensidad de ese café que nos mantiene despiertos, con la paciencia del tiempo que hemos esperado y con la pasión de todos los besos que aún nos quedan por dar. Quiero ser el hombre que te haga sonreír cada mañana, que te abrace cuando lo necesites y que te ame por el resto de nuestros días.</p>
+                    <p>Que este sentimiento que nació en mí el día que te vi nunca, nunca se acabe. Porque te quiero, Rosmery. Te quiero con todo lo que soy y con todo lo que espero ser a tu lado.</p>
+                    <div class="romantic-signature">Con todo el amor del mundo,<br>Andy</div>
+                    <div class="romantic-date">Hoy y para siempre</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opciones de respuesta románticas -->
+        <div class="romantic-response" id="romanticResponse">
+            <div class="romantic-question-title">¿Aceptas comenzar este viaje de amor con Andy?</div>
+            <div class="romantic-buttons">
+                <button class="romantic-btn romantic-yes" id="btnRomanticYes">¡SÍ!</button>
+                <button class="romantic-btn romantic-no" id="btnRomanticNo">No</button>
+            </div>
+        </div>
+
+        <div class="romantic-footer">
+            Creado con todo el amor del universo por Andy para Rosmery<br>
+            Que este momento quede grabado en la eternidad de nuestros corazones
+        </div>
+    </div>
+
+    <!-- Resultado SÍ romántico -->
+    <div class="romantic-result" id="romanticResultYes">
+        <div class="romantic-result-content">
+            <h2 class="romantic-result-title">¡SÍ ACEPTO!</h2>
+            <div class="romantic-result-message">
+                Rosmery, has hecho de este el día más feliz de mi vida. A partir de hoy, caminaremos juntos por este sendero de amor, construyendo sueños y compartiendo risas.
+            </div>
+            <div class="romantic-animation">💑💖🎉✨</div>
+            <div class="romantic-result-message">
+                Que nuestro amor florezca como las más bellas rosas y brille como las estrellas más luminosas del firmamento.
+            </div>
+            <button class="romantic-btn romantic-yes" onclick="location.reload()" style="margin-top: 20px;">Revivir este momento mágico</button>
+        </div>
+    </div>
+
+    <!-- Resultado NO romántico -->
+    <div class="romantic-result" id="romanticResultNo">
+        <div class="romantic-result-content">
+            <h2 class="romantic-result-title">Lo comprendo...</h2>
+            <div class="romantic-result-message">
+                Rosmery, valoro profundamente tu honestidad y respeto tu decisión. Aunque mi corazón siente un poco de tristeza, tu felicidad siempre será lo más importante para mí.
+            </div>
+            <div class="romantic-animation">💔😔🌹</div>
+            <div class="romantic-result-message">
+                Espero que la vida te conceda todos los sueños que anhelas y que encuentres la felicidad que mereces.
+            </div>
+            <button class="romantic-btn romantic-no" onclick="location.reload()" style="margin-top: 20px;">Cerrar esta página</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const nightSky = document.getElementById('nightSky');
+            const romanticGarden = document.getElementById('romanticGarden');
+            const letterRomantic = document.getElementById('letterRomantic');
+            const letterOpenRomantic = document.getElementById('letterOpenRomantic');
+            const romanticResponse = document.getElementById('romanticResponse');
+            const btnRomanticYes = document.getElementById('btnRomanticYes');
+            const btnRomanticNo = document.getElementById('btnRomanticNo');
+            const romanticResultYes = document.getElementById('romanticResultYes');
+            const romanticResultNo = document.getElementById('romanticResultNo');
+            const angel1 = document.getElementById('angel1');
+            const angel2 = document.getElementById('angel2');
+            const angel3 = document.getElementById('angel3');
+            
+            // Crear elementos del jardín romántico
+            createRomanticScene();
+            
+            // Posicionar ángeles
+            positionAngels();
+            
+            // Abrir la carta al hacer clic
+            letterRomantic.addEventListener('click', openRomanticLetter);
+            
+            // Manejar las respuestas
+            btnRomanticYes.addEventListener('click', () => showRomanticResult('yes'));
+            btnRomanticNo.addEventListener('click', () => showRomanticResult('no'));
+            
+            // Función para crear la escena romántica completa
+            function createRomanticScene() {
+                // Crear estrellas
+                createStars();
+                
+                // Crear luciérnagas
+                createFireflies();
+                
+                // Crear casita de amor
+                createLoveHouse();
+                
+                // Crear árboles
+                createTrees();
+                
+                // Crear flores
+                createFlowers();
+                
+                // Crear fuente de amor
+                createLoveFountain();
+                
+                // Crear banquito
+                createBench();
+                
+                // Crear corazones flotantes
+                createFloatingHearts();
+            }
+            
+            // Crear estrellas en el cielo
+            function createStars() {
+                const starCount = 150;
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    
+                    // Posición aleatoria
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 70;
+                    
+                    star.style.left = `${left}%`;
+                    star.style.top = `${top}%`;
+                    
+                    // Tamaño aleatorio
+                    const size = Math.random() * 3;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    
+                    // Brillo aleatorio
+                    const brightness = 0.3 + Math.random() * 0.7;
+                    star.style.opacity = brightness;
+                    
+                    // Animación de parpadeo
+                    const duration = 3 + Math.random() * 4;
+                    const delay = Math.random() * 5;
+                    star.style.animation = `twinkle ${duration}s infinite ${delay}s`;
+                    
+                    nightSky.appendChild(star);
+                }
+            }
+            
+            // Crear luciérnagas
+            function createFireflies() {
+                const fireflyCount = 12;
+                
+                for (let i = 0; i < fireflyCount; i++) {
+                    const firefly = document.createElement('div');
+                    firefly.className = 'firefly';
+                    
+                    // Posición inicial aleatoria
+                    const left = Math.random() * 100;
+                    const top = 20 + Math.random() * 60;
+                    
+                    firefly.style.left = `${left}%`;
+                    firefly.style.top = `${top}%`;
+                    
+                    // Tamaño aleatorio
+                    const size = 2 + Math.random() * 3;
+                    firefly.style.width = `${size}px`;
+                    firefly.style.height = `${size}px`;
+                    
+                    // Intensidad del brillo
+                    const intensity = 0.5 + Math.random() * 0.5;
+                    firefly.style.opacity = intensity;
+                    
+                    // Animación personalizada
+                    const duration = 10 + Math.random() * 20;
+                    firefly.style.animation = `fireflyMove ${duration}s infinite linear`;
+                    firefly.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    nightSky.appendChild(firefly);
+                }
+            }
+            
+            // Crear casita de amor
+            function createLoveHouse() {
+                const house = document.createElement('div');
+                house.className = 'love-house';
+                house.innerHTML = `
+                    <div class="house-body"></div>
+                    <div class="house-roof"></div>
+                    <div class="house-window"></div>
+                    <div class="house-door"></div>
+                    <div class="house-heart">❤️</div>
+                `;
+                romanticGarden.appendChild(house);
+            }
+            
+            // Crear árboles
+            function createTrees() {
+                const treePositions = [
+                    { left: '3%', bottom: '100px' },
+                    { left: '15%', bottom: '90px' },
+                    { left: '28%', bottom: '110px' },
+                    { left: '70%', bottom: '105px' },
+                    { left: '82%', bottom: '95px' }
+                ];
+                
+                treePositions.forEach((pos, index) => {
+                    const tree = document.createElement('div');
+                    tree.className = 'tree';
+                    tree.style.left = pos.left;
+                    tree.style.bottom = pos.bottom;
+                    
+                    tree.innerHTML = `
+                        <div class="tree-trunk"></div>
+                        <div class="tree-crown"></div>
+                        <div class="tree-heart">${index % 2 === 0 ? '❤️' : '💖'}</div>
+                    `;
+                    
+                    romanticGarden.appendChild(tree);
+                });
+            }
+            
+            // Crear flores
+            function createFlowers() {
+                const flowerCount = 15;
+                
+                for (let i = 0; i < flowerCount; i++) {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower';
+                    
+                    // Posición en el jardín
+                    const left = 3 + Math.random() * 94;
+                    const bottom = 100 + Math.random() * 30;
+                    
+                    flower.style.left = `${left}%`;
+                    flower.style.bottom = `${bottom}px`;
+                    
+                    // Rotación
+                    const rotation = Math.random() * 360;
+                    
+                    flower.innerHTML = `
+                        <div class="flower-petal" style="transform: rotate(${rotation}deg);"></div>
+                        <div class="flower-petal" style="transform: rotate(${rotation + 90}deg);"></div>
+                        <div class="flower-petal" style="transform: rotate(${rotation + 180}deg);"></div>
+                        <div class="flower-petal" style="transform: rotate(${rotation + 270}deg);"></div>
+                        <div class="flower-center"></div>
+                        <div class="flower-stem"></div>
+                        <div class="flower-leaf" style="left: 12px; transform: rotate(45deg);"></div>
+                        <div class="flower-leaf" style="right: 12px; transform: rotate(-45deg);"></div>
+                    `;
+                    
+                    // Animación de flotación
+                    const floatDuration = 3 + Math.random() * 4;
+                    flower.style.animation = `float ${floatDuration}s infinite ease-in-out`;
+                    flower.style.animationDelay = `${Math.random() * 2}s`;
+                    
+                    romanticGarden.appendChild(flower);
+                }
+            }
+            
+            // Crear fuente de amor
+            function createLoveFountain() {
+                const fountain = document.createElement('div');
+                fountain.className = 'love-fountain';
+                fountain.innerHTML = `
+                    <div class="fountain-base"></div>
+                    <div class="fountain-middle"></div>
+                    <div class="fountain-top"></div>
+                `;
+                romanticGarden.appendChild(fountain);
+                
+                // Crear gotas de agua
+                createWaterDrops();
+            }
+            
+            // Crear gotas de agua para la fuente
+            function createWaterDrops() {
+                const dropCount = 6;
+                
+                for (let i = 0; i < dropCount; i++) {
+                    setTimeout(() => {
+                        const drop = document.createElement('div');
+                        drop.className = 'water-drop';
+                        
+                        // Posición alrededor de la fuente
+                        const angle = (i * 60) * Math.PI / 180;
+                        const radius = 20;
+                        const left = 50 + Math.cos(angle) * radius;
+                        const top = 50 + Math.sin(angle) * radius;
+                        
+                        drop.style.left = `${left}%`;
+                        drop.style.top = `${top}%`;
+                        
+                        // Animación
+                        const duration = 1.5 + Math.random() * 1;
+                        drop.style.animation = `waterDrop ${duration}s infinite`;
+                        drop.style.animationDelay = `${i * 0.2}s`;
+                        
+                        romanticGarden.appendChild(drop);
+                    }, i * 200);
+                }
+            }
+            
+            // Crear banquito
+            function createBench() {
+                const bench = document.createElement('div');
+                bench.className = 'bench';
+                bench.innerHTML = `
+                    <div class="bench-seat"></div>
+                    <div class="bench-back"></div>
+                    <div class="bench-legs" style="left: 8px;"></div>
+                    <div class="bench-legs" style="right: 8px;"></div>
+                `;
+                romanticGarden.appendChild(bench);
+            }
+            
+            // Crear corazones flotantes
+            function createFloatingHearts() {
+                const heartCount = 8;
+                const heartTypes = ['❤️', '💖', '💗', '💓', '💕'];
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    
+                    // Posición inicial
+                    const left = Math.random() * 100;
+                    heart.style.left = `${left}%`;
+                    heart.style.bottom = '100px';
+                    
+                    // Tipo de corazón aleatorio
+                    heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+                    
+                    // Tamaño aleatorio
+                    const size = 1 + Math.random() * 1.2;
+                    heart.style.fontSize = `${size}rem`;
+                    
+                    // Animación
+                    const duration = 5 + Math.random() * 10;
+                    const delay = Math.random() * 5;
+                    heart.style.animation = `floatHeart ${duration}s infinite ease-in-out`;
+                    heart.style.animationDelay = `${delay}s`;
+                    
+                    romanticGarden.appendChild(heart);
+                }
+            }
+            
+            // Posicionar ángeles en la pantalla
+            function positionAngels() {
+                // Ángel 1 - izquierda
+                angel1.style.left = '3%';
+                angel1.style.top = '15%';
+                angel1.style.opacity = '1';
+                angel1.style.animationDelay = '0.5s';
+                
+                // Ángel 2 - centro
+                angel2.style.left = '50%';
+                angel2.style.top = '10%';
+                angel2.style.opacity = '1';
+                angel2.style.transform = 'translateX(-50%)';
+                angel2.style.animationDelay = '1s';
+                
+                // Ángel 3 - derecha
+                angel3.style.right = '3%';
+                angel3.style.top = '20%';
+                angel3.style.opacity = '1';
+                angel3.style.animationDelay = '1.5s';
+            }
+            
+            // Función para abrir la carta romántica
+            function openRomanticLetter() {
+                // Animación de apertura de la carta
+                letterRomantic.style.transform = 'rotateY(180deg) scale(1.1)';
+                letterRomantic.style.opacity = '0';
+                
+                // Animación de ángeles
+                animateAngelsCelebration();
+                
+                setTimeout(() => {
+                    // Ocultar carta cerrada
+                    letterRomantic.parentElement.style.display = 'none';
+                    
+                    // Mostrar carta abierta con animación
+                    letterOpenRomantic.style.display = 'block';
+                    letterOpenRomantic.style.animation = 'fadeInUp 1.2s ease-out';
+                    
+                    // Efecto de brillo en el jardín
+                    romanticGarden.style.filter = 'brightness(1.1)';
+                    
+                    // Después de un momento, mostrar las opciones de respuesta
+                    setTimeout(() => {
+                        romanticResponse.style.display = 'flex';
+                        
+                        // Hacer scroll suave a las opciones
+                        setTimeout(() => {
+                            romanticResponse.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center' 
+                            });
+                        }, 300);
+                    }, 1800);
+                }, 800);
+            }
+            
+            // Animación de ángeles celebrando
+            function animateAngelsCelebration() {
+                // Ángel 1 vuela hacia arriba
+                angel1.style.transition = 'all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                angel1.style.top = '-5%';
+                angel1.style.transform = 'scale(1.3)';
+                
+                // Ángel 2 hace una espiral
+                angel2.style.transition = 'all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                angel2.style.top = '5%';
+                angel2.style.left = '55%';
+                angel2.style.transform = 'scale(1.3) rotate(360deg)';
+                
+                // Ángel 3 vuela hacia arriba
+                angel3.style.transition = 'all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                angel3.style.top = '-3%';
+                angel3.style.transform = 'scale(1.3)';
+                
+                // Regresar después de un tiempo
+                setTimeout(() => {
+                    angel1.style.transition = 'all 1.2s ease-out';
+                    angel1.style.top = '15%';
+                    angel1.style.transform = 'scale(1)';
+                    
+                    angel2.style.transition = 'all 1.2s ease-out';
+                    angel2.style.top = '10%';
+                    angel2.style.left = '50%';
+                    angel2.style.transform = 'translateX(-50%) scale(1)';
+                    
+                    angel3.style.transition = 'all 1.2s ease-out';
+                    angel3.style.top = '20%';
+                    angel3.style.transform = 'scale(1)';
+                }, 1500);
+            }
+            
+            // Función para mostrar el resultado romántico
+            function showRomanticResult(answer) {
+                // Ocultar todo
+                letterOpenRomantic.style.display = 'none';
+                romanticResponse.style.display = 'none';
+                
+                // Mostrar el resultado correspondiente
+                if (answer === 'yes') {
+                    romanticResultYes.style.display = 'flex';
+                    createRomanticFireworks();
+                    playRomanticMusic();
+                } else {
+                    romanticResultNo.style.display = 'flex';
+                    playSadRomanticMusic();
+                }
+            }
+            
+            // Crear fuegos artificiales románticos
+            function createRomanticFireworks() {
+                const colors = ['#ff6b9d', '#ff4081', '#e040fb', '#7c4dff', '#ffd700', '#ffa500'];
+                
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        const firework = document.createElement('div');
+                        firework.className = 'firework';
+                        
+                        // Posición aleatoria
+                        const left = Math.random() * 100;
+                        const top = Math.random() * 100;
+                        
+                        firework.style.left = `${left}%`;
+                        firework.style.top = `${top}%`;
+                        
+                        // Color aleatorio
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        firework.style.backgroundColor = color;
+                        firework.style.boxShadow = `0 0 15px ${color}`;
+                        
+                        // Tamaño aleatorio
+                        const size = 6 + Math.random() * 10;
+                        firework.style.width = `${size}px`;
+                        firework.style.height = `${size}px`;
+                        
+                        // Forma de corazón algunas veces
+                        if (Math.random() > 0.7) {
+                            firework.style.borderRadius = '0';
+                            firework.style.transform = 'rotate(45deg)';
+                            firework.style.width = `${size}px`;
+                            firework.style.height = `${size}px`;
+                            firework.style.backgroundColor = '#ff6b9d';
+                        }
+                        
+                        document.body.appendChild(firework);
+                        
+                        // Animación de explosión
+                        setTimeout(() => {
+                            const explosionSize = 40 + Math.random() * 80;
+                            
+                            firework.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                            firework.style.transform = `scale(${explosionSize}) rotate(${Math.random() * 360}deg)`;
+                            firework.style.opacity = '0';
+                            
+                            // Crear explosión de corazones
+                            if (Math.random() > 0.5) {
+                                createHeartExplosion(left, top);
+                            }
+                            
+                            // Eliminar después de la animación
+                            setTimeout(() => {
+                                if (firework.parentNode) {
+                                    firework.parentNode.removeChild(firework);
+                                }
+                            }, 600);
+                        }, 80);
+                    }, i * 150);
+                }
+            }
+            
+            // Crear explosión de corazones
+            function createHeartExplosion(x, y) {
+                const heartCount = 6;
+                const heartTypes = ['❤️', '💖', '💗', '💓', '💕'];
+                
+                for (let i = 0; i < heartCount; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'floating-heart';
+                        
+                        heart.style.left = `${x}%`;
+                        heart.style.top = `${y}%`;
+                        heart.style.position = 'fixed';
+                        heart.style.zIndex = '21';
+                        heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+                        heart.style.fontSize = '1.5rem';
+                        
+                        document.body.appendChild(heart);
+                        
+                        // Dirección aleatoria
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 10 + Math.random() * 20;
+                        const targetX = x + Math.cos(angle) * distance;
+                        const targetY = y + Math.sin(angle) * distance;
+                        
+                        // Animación
+                        setTimeout(() => {
+                            heart.style.transition = 'all 1s ease-out';
+                            heart.style.left = `${targetX}%`;
+                            heart.style.top = `${targetY}%`;
+                            heart.style.opacity = '0';
+                            heart.style.transform = 'scale(1.5)';
+                            
+                            // Eliminar después de la animación
+                            setTimeout(() => {
+                                if (heart.parentNode) {
+                                    heart.parentNode.removeChild(heart);
+                                }
+                            }, 1000);
+                        }, 10);
+                    }, i * 40);
+                }
+            }
+            
+            // Efectos de sonido románticos (simulados visualmente)
+            function playRomanticMusic() {
+                // Crear notas musicales visuales
+                const musicNotes = document.createElement('div');
+                musicNotes.style.position = 'fixed';
+                musicNotes.style.bottom = '15px';
+                musicNotes.style.right = '15px';
+                musicNotes.style.zIndex = '100';
+                musicNotes.style.fontSize = '2rem';
+                musicNotes.innerHTML = '🎵🎶💖🎉';
+                musicNotes.style.animation = 'pulseHint 1.5s infinite';
+                
+                document.body.appendChild(musicNotes);
+                
+                // Eliminar después de un tiempo
+                setTimeout(() => {
+                    musicNotes.remove();
+                }, 5000);
+            }
+            
+            function playSadRomanticMusic() {
+                // Crear efectos visuales de música triste
+                const musicNotes = document.createElement('div');
+                musicNotes.style.position = 'fixed';
+                musicNotes.style.bottom = '15px';
+                musicNotes.style.right = '15px';
+                musicNotes.style.zIndex = '100';
+                musicNotes.style.fontSize = '2rem';
+                musicNotes.innerHTML = '🎵😔🌧️';
+                musicNotes.style.animation = 'pulseHint 2s infinite';
+                
+                document.body.appendChild(musicNotes);
+                
+                // Crear efecto de lluvia de pétalos
+                createFallingPetals();
+                
+                // Eliminar después de un tiempo
+                setTimeout(() => {
+                    musicNotes.remove();
+                }, 5000);
+            }
+            
+            // Crear lluvia de pétalos para la respuesta NO
+            function createFallingPetals() {
+                const petalCount = 20;
+                
+                for (let i = 0; i < petalCount; i++) {
+                    setTimeout(() => {
+                        const petal = document.createElement('div');
+                        petal.style.position = 'fixed';
+                        petal.style.top = '-15px';
+                        petal.style.left = `${Math.random() * 100}%`;
+                        petal.style.width = '12px';
+                        petal.style.height = '12px';
+                        petal.style.background = 'linear-gradient(135deg, #ff6b9d, #ff4081)';
+                        petal.style.borderRadius = '50% 0 50% 0';
+                        petal.style.zIndex = '19';
+                        petal.style.opacity = '0.7';
+                        
+                        document.body.appendChild(petal);
+                        
+                        // Animación de caída
+                        const fallDuration = 2 + Math.random() * 1.5;
+                        const horizontalMove = (Math.random() - 0.5) * 60;
+                        
+                        petal.style.transition = `all ${fallDuration}s linear`;
+                        petal.style.top = '100%';
+                        petal.style.left = `calc(${petal.style.left} + ${horizontalMove}px)`;
+                        petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        
+                        // Eliminar después de la animación
+                        setTimeout(() => {
+                            if (petal.parentNode) {
+                                petal.parentNode.removeChild(petal);
+                            }
+                        }, fallDuration * 1000);
+                    }, i * 200);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
